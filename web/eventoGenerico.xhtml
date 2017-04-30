@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     
     <h:head>
         <title>Facelet Title</title>
@@ -12,25 +13,33 @@
         <h:form id ="barra">  
             <p:growl id="messages"/>
             <p:menubar>
-                <p:menuitem value="Inicio" url="#" />
+                <p:menuitem value="Inicio" url="" />
                 <p:menuitem value="Sitios" url="#" />
-                <f:facet name="options">
-                    <p:inputText id="buscar" style="margin-right:10px" placeholder="Buscar"  onclick="showCalendar()">
+                <c:choose>
+                <c:when test="#{login.logged}">
+                <p:menuitem value="mis sitios" url="#" />
+                
+                </c:when>
+                <c:otherwise>
+                    <f:facet name="options">
+                    <p:inputText id="buscar" style="margin-right:10px" placeholder="Buscar">
                             <p:calendar id="calendario" value="#{calendarView.date1}"  rendered="false"/>     
                     </p:inputText> 
                     <p:commandButton type="button" value="Login" icon="ui-icon-extlink" onclick="PF('dlg').show();"/>
                 </f:facet>
+                </c:otherwise>
+                </c:choose>
             </p:menubar>
                 <p:dialog header="Login" widgetVar="dlg" resizable="false">
                     <h:panelGrid columns="2" cellpadding="5">
                         <h:outputLabel for="username" value="Username:" />
-                        <p:inputText id="username" value="#{userLoginView.username}" required="true" label="username" />
+                        <p:inputText id="username" value="#{login.nombreOCorreo}" required="true" label="username" />
 
                         <h:outputLabel for="password" value="Password:" />
-                        <p:password id="password" value="#{userLoginView.password}" required="true" label="password" />
+                        <p:password id="password" value="#{login.contrasena}" required="true" label="password" />
 
                         <f:facet name="footer">
-                            <p:commandButton value="Login" update="barra" actionListener="#{userLoginView.login}"/>
+                            <p:commandButton value="Login" update="barra" actionListener="#{login.autenticar()}"/>
                             <p:commandButton value="¿No tienes cuenta?" update="barra" actionListener="#{userLoginView.login}"/>
                         </f:facet>  
                     </h:panelGrid>

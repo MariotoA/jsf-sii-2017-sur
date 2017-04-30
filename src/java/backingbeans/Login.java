@@ -7,18 +7,26 @@ package backingbeans;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 import jpa.Usuario;
 
 /**
  *
  * @author malex
  */
+
+@ManagedBean(name = "login")
+@ApplicationScoped
 public class Login {
     private final static String ADMINISTRADOR="a";
     private final static String USUARIO="u";
     private final static String PERIODISTA="p";
     private final static String SUPERUSUARIO="s";
-    List<Usuario> usuarios;
+    private List<Usuario> usuarios;
+    private String nombreOCorreo;
+    private String contrasena;
+    private String rol;
     public Login() {
         Usuario usuario = new Usuario();
         usuario.setNombre("Mariot");
@@ -41,4 +49,53 @@ public class Login {
         usuarios.add(superusuariu);
 
     }
+    
+    public String autenticar() {
+        Usuario us = usuarios.stream().filter(u-> 
+                (u.getNombre().equals(nombreOCorreo) || u.getEmail().equals(nombreOCorreo))&&
+                        u.getContraseña().equals(contrasena)).findFirst().orElse(null);
+        rol = us!=null? us.getRol() : null;
+        return "eventoGenerico.xhtml";
+    
+    }
+    public String logout() {
+        nombreOCorreo = null;
+        contrasena = null;
+        rol = null;
+        return "eventoGenerico.xhtml";
+    
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public String getNombreOCorreo() {
+        return nombreOCorreo;
+    }
+
+    public void setNombreOCorreo(String nombreOCorreo) {
+        this.nombreOCorreo = nombreOCorreo;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public boolean isLogged() {
+        return rol!=null;
+    }
+    
 }
