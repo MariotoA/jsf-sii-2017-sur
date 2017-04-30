@@ -20,8 +20,8 @@ import jpa.*;
 @ManagedBean(name="vistaEventoGenerico")
 @ViewScoped
 public class VistaEventoGenerico implements Serializable {
-    private final static String imagen = "https://www.dondevive.org/wp-content/uploads/2015/07/leon.jpg";
-    private final static String video = "https://www.youtube.com/watch?v=6hgVihWjK2c";
+    private final static String IMAGEN = "https://www.dondevive.org/wp-content/uploads/2015/07/leon.jpg";
+    private final static String VIDEO = "https://www.youtube.com/watch?v=6hgVihWjK2c";
     
     private List<Evento> eventos;
     private List<Sitio> sitios;
@@ -62,7 +62,7 @@ public class VistaEventoGenerico implements Serializable {
         Sitio sit = new Sitio();
         sit.setNombre("nombreSitio"+i);
         sit.setPais("España");
-        sit.setFoto(imagen);
+        sit.setFoto(IMAGEN);
         sit.setCiudad("Malaga");
         sit.setProvincia("Málaga");
         sit.setUrl("http://www.uma.es/");
@@ -77,9 +77,9 @@ public class VistaEventoGenerico implements Serializable {
         ev.setLocalizacion(sit);
         ev.setNombre("Titulo evento "+ i);
         ev.setDescripcion("Esta es la descripcion de un evento."+ i);
-        ev.setFoto(imagen);
+        ev.setFoto(IMAGEN);
         ev.setTag("TAG: "+i);
-        ev.setVideo(video);
+        ev.setVideo(VIDEO);
         sit.setEventosCelebrados(eventos);
         return ev;
     }
