@@ -23,23 +23,25 @@
             </p:menubar>
         </h:form>
         <h:form id="eventos">
-            <p:repeat value="#{VistaEventoGenerico.eventos}" var="evento">
-                <p:panelGrid columns="2">
+            <p:repeat value="#{vistaEventoGenerico}" var="evento">
+                <p:panelGrid columns="2" >
+                    <p:graphicImage width="100" height="100" url="#{evento.foto}" /> 
                     <f:facet name="header">
-                        <p:graphicImage name="#{evento}" />
+                        <h:outputText value="#{evento.nombre}"></h:outputText>
                     </f:facet>
 
-                    <h:outputText value="Name:" />
-                    <h:outputText value="Kobe Bryant" />
-
-                    <h:outputText value="Team:" />
-                    <h:outputText value="Los Angeles Lakers" />
-
-                    <h:outputText value="Position:" />
-                    <h:outputText value="Shooting Guard" />
-
-                    <h:outputText value="Number:" />
-                    <h:outputText value="24" />
+                    <p:outputPanel>
+                <h:panelGrid columns="2" cellpadding="5" >
+                    <h:outputText value="Fecha:" />
+                    <h:outputText value="#{evento}" style="font-weight: bold"/>
+ 
+                    <h:outputText value="Year:" />
+                    <h:outputText value="#" style="font-weight: bold"/>
+ 
+                    <h:outputText value="Color:" />
+                    <h:outputText value="#{car.color}" style="font-weight: bold"/>
+                </h:panelGrid>
+            </p:outputPanel>
                 </p:panelGrid>
             </p:repeat>
         </h:form>

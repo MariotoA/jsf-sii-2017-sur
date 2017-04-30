@@ -17,13 +17,17 @@ import jpa.*;
  *
  * @author malex
  */
-@ManagedBean
+@ManagedBean(name="vistaEventoGenerico")
 @ViewScoped
 public class VistaEventoGenerico implements Serializable {
-    private final static String imagen = "imagen-cachorro-comprimir.jpg";
+    private final static String imagen = "https://www.dondevive.org/wp-content/uploads/2015/07/leon.jpg";
     private final static String video = "https://www.youtube.com/watch?v=6hgVihWjK2c";
+    
     private List<Evento> eventos;
     private List<Sitio> sitios;
+    private List<VistaEvento> vistaEventos;
+    
+    
     @PostConstruct
     public void init() {
         Evento ev;
@@ -31,21 +35,19 @@ public class VistaEventoGenerico implements Serializable {
         List<Sesion> ses;
         eventos = new ArrayList<>();
         sitios = new ArrayList<>();
+        vistaEventos = new ArrayList<>();
         for (int i = 1; i < 31; i++) {
             sit = creaSitio(i);
             ev = creaEvento(sit,i);
             ses = creaSesiones(ev,i);
             sitios.add(sit);
             eventos.add(ev);
+            vistaEventos.add(new VistaEvento(ev));
         }
     }
 
     public List<Sitio> getSitios() {
         return sitios;
-    }
-
-    public void setSitios(List<Sitio> sitios) {
-        this.sitios = sitios;
     }
 
     private Sitio creaSitio(int i) {
@@ -65,7 +67,7 @@ public class VistaEventoGenerico implements Serializable {
     private Evento creaEvento(Sitio sit, int i) {
         Evento ev=new Evento();
         ev.setLocalizacion(sit);
-        ev.setNombre("Titulo evento");
+        ev.setNombre("Titulo evento "+ i);
         ev.setDescripcion("Esta es la descripcion de un evento."+ i);
         ev.setFoto(imagen);
         ev.setTag("TAG: "+i);
