@@ -23,23 +23,26 @@
             </p:menubar>
         </h:form>
         <h:form id="eventos">
-            <p:repeat value="#{vistaEventoGenerico}" var="evento">
+            <p:repeat value="#{vistaEventoGenerico.vistaEventos}" var="evento" size="5">
                 <p:panelGrid columns="2" >
-                    <p:graphicImage width="100" height="100" url="#{evento.foto}" /> 
+                    <p:graphicImage width="200" height="200" url="#{evento.imagen}" /> 
                     <f:facet name="header">
                         <h:outputText value="#{evento.nombre}"></h:outputText>
                     </f:facet>
 
                     <p:outputPanel>
                 <h:panelGrid columns="2" cellpadding="5" >
-                    <h:outputText value="Fecha:" />
-                    <h:outputText value="#{evento}" style="font-weight: bold"/>
+                    <h:outputText value="Tag:" />
+                    <h:outputText value="#{evento.tag}" style="font-weight: bold"/>
+                    
+                    <h:outputText value="Fecha Inicio:" />
+                    <h:outputText value="#{evento.fechaIn}" style="font-weight: bold"/>
  
-                    <h:outputText value="Year:" />
-                    <h:outputText value="#" style="font-weight: bold"/>
+                    <h:outputText value="Fecha Fin:" />
+                    <h:outputText value="#{evento.fechaFin}" style="font-weight: bold"/>
  
-                    <h:outputText value="Color:" />
-                    <h:outputText value="#{car.color}" style="font-weight: bold"/>
+                    <h:outputText value="Descripción:" />
+                    <h:outputText value="#{evento.descripcion}" style="font-weight: bold"/>
                 </h:panelGrid>
             </p:outputPanel>
                 </p:panelGrid>

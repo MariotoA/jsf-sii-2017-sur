@@ -5,14 +5,23 @@
  */
 package backingbeans;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import jpa.Evento;
+import jpa.Sesion;
 
 /**
  *
  * @author malex
  */
-public class VistaEvento {
+
+@ManagedBean
+@ApplicationScoped
+public class VistaEvento implements Serializable {
     private Date fechaIn;
     private Date fechaFin;
     private String nombre;
@@ -22,8 +31,8 @@ public class VistaEvento {
     private String tag;
 
     public VistaEvento(Evento ev) {
-        this.fechaIn = ev.getSesionesCelebradas().get(1).getFechaInicio();
-        this.fechaFin = ev.getSesionesCelebradas().get(1).getFechaFin();
+        this.fechaIn = ev.getSesionesCelebradas().get(0).getFechaInicio();
+        this.fechaFin = ev.getSesionesCelebradas().get(0).getFechaFin();
         this.nombre = ev.getNombre();
         this.descripcion = ev.getDescripcion();
         this.imagen = ev.getFoto();

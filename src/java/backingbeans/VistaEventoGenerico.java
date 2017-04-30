@@ -26,6 +26,14 @@ public class VistaEventoGenerico implements Serializable {
     private List<Evento> eventos;
     private List<Sitio> sitios;
     private List<VistaEvento> vistaEventos;
+
+    public List<VistaEvento> getVistaEventos() {
+        return vistaEventos;
+    }
+
+    public void setVistaEventos(List<VistaEvento> vistaEventos) {
+        this.vistaEventos = vistaEventos;
+    }
     
     
     @PostConstruct
@@ -88,7 +96,8 @@ public class VistaEventoGenerico implements Serializable {
         sesi.setFechaFin(fechaFin);
         sesi.setUrlCompraEntrada("www.uma.es");
         sesi.setPrecio(i);
-        ses.add(sesi);        
+        ses.add(sesi);
+        ev.setSesionesCelebradas(ses);
         return ses;
     }
 
