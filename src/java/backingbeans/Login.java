@@ -7,8 +7,9 @@ package backingbeans;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import jpa.Usuario;
 
 /**
@@ -17,7 +18,7 @@ import jpa.Usuario;
  */
 
 @ManagedBean(name = "login")
-@ApplicationScoped
+@SessionScoped
 public class Login {
     private final static String ADMINISTRADOR="a";
     private final static String USUARIO="u";
@@ -62,6 +63,9 @@ public class Login {
         nombreOCorreo = null;
         contrasena = null;
         rol = null;
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        ctx.getExternalContext().invalidateSession();
+        System.out.println("A");
         return "eventoGenerico.xhtml";
     
     }

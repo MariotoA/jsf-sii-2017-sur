@@ -17,15 +17,22 @@
                 <p:menuitem value="Sitios" url="#" />
                 <c:choose>
                 <c:when test="#{login.logged}">
-                <p:menuitem value="mis sitios" url="#" />
-                
+                    <p:menuitem value="mis sitios" url="#" />
+                    <f:facet name="options">
+                        <p:inputText id="buscar" style="margin-right:10px" placeholder="Buscar">
+                                <p:calendar id="calendario" value="#{calendarView.date1}"  rendered="false"/>     
+                        </p:inputText> 
+                        
+                        <p:commandButton type="button" value="Salir" icon="ui-icon-extlink" action="#{login.logout()}" ajax="false" />
+                    </f:facet>
                 </c:when>
                 <c:otherwise>
                     <f:facet name="options">
                     <p:inputText id="buscar" style="margin-right:10px" placeholder="Buscar">
                             <p:calendar id="calendario" value="#{calendarView.date1}"  rendered="false"/>     
                     </p:inputText> 
-                    <p:commandButton type="button" value="Login" icon="ui-icon-extlink" onclick="PF('dlg').show();"/>
+                        
+                        <p:commandButton type="button" value="Login" icon="ui-icon-extlink" onclick="PF('dlg').show();"/>
                 </f:facet>
                 </c:otherwise>
                 </c:choose>
