@@ -5,20 +5,14 @@
  */
 package backingbeans;
 
-import java.io.Serializable;
 import java.util.Date;
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
 import jpa.Evento;
 
 /**
  *
  * @author malex
  */
-
-@ManagedBean
-@ApplicationScoped
-public class VistaEvento implements Serializable {
+public class VistaEventoDetalle {
     private Date fechaIn;
     private Date fechaFin;
     private String nombre;
@@ -31,7 +25,7 @@ public class VistaEvento implements Serializable {
     private String urlCompraEntrada;
     
 
-    public VistaEvento(Evento ev) {
+    public VistaEventoDetalle(Evento ev) {
         this.fechaIn = ev.getSesionesCelebradas().get(0).getFechaInicio();
         this.fechaFin = ev.getSesionesCelebradas().get(0).getFechaFin();
         this.nombre = ev.getNombre();
@@ -41,7 +35,6 @@ public class VistaEvento implements Serializable {
         this.tag = ev.getTag();
         this.video = ev.getVideo();
         this.precioEntradas = ev.getSesionesCelebradas().get(0).getPrecio();
-        System.out.print(0);
         this.urlCompraEntrada = ev.getSesionesCelebradas().get(0).getUrlCompraEntrada();
     }
     
@@ -125,4 +118,5 @@ public class VistaEvento implements Serializable {
     public void setUrlCompraEntrada(String urlCompraEntrada) {
         this.urlCompraEntrada = urlCompraEntrada;
     }
+    
 }
