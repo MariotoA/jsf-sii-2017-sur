@@ -10,7 +10,6 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <div>
         <h:form id ="barra">  
             <p:growl id="messages"/>
             <p:menubar>
@@ -53,39 +52,33 @@
                     </h:panelGrid>
              </p:dialog>
         </h:form>
-        
-        </div>
-        <h:form id="eventos" >
-            <p:panelGrid columns="2" >
-                <p:graphicImage width="200" height="200" url="#{eventoClicado.eventoClicado.imagen}"  /> 
+        <h:form id="eventos">
+            <p:repeat value="#{vistaEventoGenerico.sitios}" var="sitio" size="5">
+                <p:panelGrid columns="2" >
+                    <p:graphicImage width="200" height="200" url="#{sitio.foto}"  /> 
                     <f:facet name="header" >
-                        <h:link outcome="eventoDetalle" value="#{eventoClicado.eventoClicado.nombre}"></h:link>
+                        <p:commandLink value="#{sitio.nombre}" ajax="false" action="#{sitioClicado.clicaYEnvia(sitio)}"/>
                     </f:facet>
 
                     <p:outputPanel>
                 <h:panelGrid columns="2" cellpadding="5" >
-                    <h:outputText value="Tag:" />
-                    <h:outputText value="#{eventoClicado.eventoClicado.tag}" style="font-weight: bold"/>
+                    <h:outputText value="Direccion:" />
+                    <h:outputText value="#{sitio.direccion}" style="font-weight: bold"/>
                     
-                    <h:outputText value="Fecha Inicio:" />
-                    <h:outputText value="#{eventoClicado.eventoClicado.fechaIn}" style="font-weight: bold"/>
+                    <h:outputText value="Ciudad:" />
+                    <h:outputText value="#{sitio.ciudad}" style="font-weight: bold"/>
  
-                    <h:outputText value="Fecha Fin:" />
-                    <h:outputText value="#{eventoClicado.eventoClicado.fechaFin}" style="font-weight: bold"/>
+                    <h:outputText value="Provincia:" />
+                    <h:outputText value="#{sitio.provincia}" style="font-weight: bold"/>
  
-                    <h:outputText value="Lugar:" />
-                    <h:outputText value="#{eventoClicado.eventoClicado.sitio}" style="font-weight: bold"/>
-                    <h:outputText value="Precio:" />
-                    <h:outputText value="#{eventoClicado.eventoClicado.precioEntradas}" style="font-weight: bold"/>
-                    <h:outputText value="Ir a compra de entradas:" />
-                    <h:outputText value="#{eventoClicado.eventoClicado.urlCompraEntrada}" style="font-weight: bold"/>
-                    <h:outputText value="Descripción:" />
-                    <h:outputText value="#{eventoClicado.eventoClicado.descripcion}" style="font-weight: bold"/>
-                    <h:outputText value="Vídeo:" />
-                    <h:outputText value="#{eventoClicado.eventoClicado.video}" style="font-weight: bold"/>
+                    <h:outputText value="Comunidad:" />
+                    <h:outputText value="#{sitio.comunidadAutonoma}" style="font-weight: bold"/>
+                    <h:outputText value="Pais:" />
+                    <h:outputText value="#{sitio.pais}" style="font-weight: bold"/>
                 </h:panelGrid>
             </p:outputPanel>
                 </p:panelGrid>
+            </p:repeat>
         </h:form>
         <p class="anuncios">AQUI VAN LOS ANUNCIOS A
             QUI VAN LOS ANUNCIOSS</p>
