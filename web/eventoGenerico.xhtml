@@ -23,7 +23,7 @@
                                 <p:calendar id="calendario" value="#{calendarView.date1}"  rendered="false"/>     
                         </p:inputText> 
                         
-                        <p:commandButton type="button" value="Salir" icon="ui-icon-extlink" action="#{login.logout()}" ajax="false" />
+                        <p:commandLink type="button" value="Salir" action="#{login.logout()}" ajax="false" />
                     </f:facet>
                 </c:when>
                 <c:otherwise>

@@ -10,6 +10,7 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
+        <div>
         <h:form id ="barra">  
             <p:growl id="messages"/>
             <p:menubar>
@@ -23,7 +24,7 @@
                                 <p:calendar id="calendario" value="#{calendarView.date1}"  rendered="false"/>     
                         </p:inputText> 
                         
-                        <p:commandButton type="button" value="Salir" icon="ui-icon-extlink" action="#{login.logout()}" ajax="false" />
+                        <p:commandLink type="button" value="Salir" action="#{login.logout()}" ajax="false" />
                     </f:facet>
                 </c:when>
                 <c:otherwise>
@@ -52,6 +53,8 @@
                     </h:panelGrid>
              </p:dialog>
         </h:form>
+        
+        </div>
         <h:form id="eventos" >
             <p:panelGrid columns="2" >
                 <p:graphicImage width="200" height="200" url="#{eventoClicado.eventoClicado.imagen}"  /> 
