@@ -104,9 +104,9 @@ public class Login {
     public boolean puedeEditar(VistaEvento ev) {
         return isLogged() && (rol.equals(PERIODISTA) 
                 || 
-                nombreOCorreo.equals(ev.)
+                nombreOCorreo.equals(ev.getUs().getNombre())
                 || 
-                nombreOCorreo.equals(ev.g));
+                nombreOCorreo.equals(ev.getUs().getEmail()));
     }
     
 }
