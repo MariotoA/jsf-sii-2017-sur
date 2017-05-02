@@ -41,10 +41,10 @@
                 <p:dialog header="Login" widgetVar="dlg" resizable="false">
                     <h:panelGrid columns="2" cellpadding="5">
                         <h:outputLabel for="username" value="Username:" />
-                        <p:inputText id="username" value="#{login.nombreOCorreo}" required="true" label="username" />
+                        <p:inputText id="username" value="#{login.nombreOCorreo}" required="false" label="username" />
 
                         <h:outputLabel for="password" value="Password:" />
-                        <p:password id="password" value="#{login.contrasena}" required="true" label="password" />
+                        <p:password id="password" value="#{login.contrasena}" required="false" label="password" />
 
                         <f:facet name="footer">
                             <p:commandButton value="Login" update="barra" actionListener="#{login.autenticar()}"/>
@@ -86,6 +86,50 @@
                 </h:panelGrid>
             </p:outputPanel>
                 </p:panelGrid>
+        </h:form>
+        <c:choose> 
+            <c:when test="#{login.logged}">
+            <h:form id="Valorar">
+                <p:commandButton value="Ir a valoraciones" onclick="PF('Valorar').show()" update="textAreaValoracion"/>
+            
+                <p:dialog widgetVar="Valorar" header="Valoraciones">
+                <p:dataScroller value="#{eventoClicado.eventoClicado.pub}" var="publicacion" chunkSize="4">
+                    <h:panelGrid columns="3">
+                        <h:outputText value="#{publicacion.creador.nombre}"></h:outputText>
+                        <h:outputText value="#{publicacion.valoracion}"></h:outputText>
+                        <h:outputText value="#{publicacion.texto}"></h:outputText>
+                    </h:panelGrid>
+                    
+                </p:dataScroller>
+                <p:spacer/>
+                <h:panelGrid columns="1">
+                    <p:selectOneMenu id="Selecciona_Puntuacion" value="Sitios" style="width:125px">
+                        <f:selectItem itemLabel="Puntuacion" itemValue="" />
+                        <f:selectItem itemLabel="1" itemValue="1"/>
+                        <f:selectItem itemLabel="2" itemValue="2"/>
+                        <f:selectItem itemLabel="3" itemValue="3"/>
+                        <f:selectItem itemLabel="4" itemValue="4"/>
+                        <f:selectItem itemLabel="5" itemValue="5"/>
+                    </p:selectOneMenu>
+                <p:inputTextarea id ="textAreaValoracion" widgetVar="textAreaValoracion" disabled="#{valoracionBean.añadirComentario}"></p:inputTextarea>
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <p:commandButton value="Adjuntar comentario" 
+                                     action="#{valoracionBean.setAñadirComentario(!valoracionBean.añadirComentario)}" 
+                                     update="textAreaValoracion"></p:commandButton>
+                    <p:commandButton value="Enviar valoracion"></p:commandButton>
+                </h:panelGrid>
+            </p:dialog>  
+        </h:form>
+                </c:when>
+            </c:choose>
+        <h:form id="galeria_Evento">
+            <p:commandButton value="Galeria" onclick="PF('Galeria_dialog').show()"/>
+            <p:dialog widgetVar="Galeria_dialog" header="Galeria">
+            <p:galleria value="#{eventoClicado.eventoClicado.media}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+                <p:graphicImage url="#{image.multimedia}" alt="Image Description for #{image.titulo}" title="#{image.titulo}"/>
+            </p:galleria>
+            </p:dialog>
         </h:form>
         <p class="anuncios">AQUI VAN LOS ANUNCIOS A
             QUI VAN LOS ANUNCIOSS</p>

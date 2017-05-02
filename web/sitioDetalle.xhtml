@@ -41,10 +41,10 @@
                 <p:dialog header="Login" widgetVar="dlg" resizable="false">
                     <h:panelGrid columns="2" cellpadding="5">
                         <h:outputLabel for="username" value="Username:" />
-                        <p:inputText id="username" value="#{login.nombreOCorreo}" required="true" label="username" />
+                        <p:inputText id="username" value="#{login.nombreOCorreo}" required="false" label="username" />
 
                         <h:outputLabel for="password" value="Password:" />
-                        <p:password id="password" value="#{login.contrasena}" required="true" label="password" />
+                        <p:password id="password" value="#{login.contrasena}" required="false" label="password" />
 
                         <f:facet name="footer">
                             <p:commandButton value="Login" update="barra" actionListener="#{login.autenticar()}"/>

@@ -20,8 +20,8 @@ import jpa.*;
 @ManagedBean(name="vistaEventoGenerico")
 @ViewScoped
 public class VistaEventoGenerico implements Serializable {
-    private final static String IMAGEN = "https://www.dondevive.org/wp-content/uploads/2015/07/leon.jpg";
-    private final static String VIDEO = "https://www.youtube.com/watch?v=6hgVihWjK2c";
+    public final static String IMAGEN = "https://www.dondevive.org/wp-content/uploads/2015/07/leon.jpg";
+    public final static String VIDEO = "https://www.youtube.com/watch?v=6hgVihWjK2c";
     
     private List<Evento> eventos;
     private List<Sitio> sitios;

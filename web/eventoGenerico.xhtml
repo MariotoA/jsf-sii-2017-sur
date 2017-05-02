@@ -19,7 +19,7 @@
                 <c:when test="#{login.logged}">
                     <p:menuitem value="mis eventos" url="#" />
                     <p:submenu label=" + ">
-                        <p:menuitem value="Crear sitio" onclick="PF('crearEv').show();"/>
+                        <p:menuitem value="Crear sitio" onclick="PF('crearSit').show();"/>
                         <p:menuitem value="Crear evento" onclick="PF('crearEv').show();" />
                     </p:submenu>
                     <f:facet name="options">
@@ -43,26 +43,26 @@
                 <p:dialog header="Login" widgetVar="dlg" resizable="false">
                     <h:panelGrid columns="2" cellpadding="5">
                         <h:outputLabel for="username" value="Username:" />
-                        <p:inputText id="username" value="#{login.nombreOCorreo}" required="true" label="username" />
+                        <p:inputText id="username" value="#{login.nombreOCorreo}" required="false" label="username" />
 
                         <h:outputLabel for="password" value="Password:" />
-                        <p:password id="password" value="#{login.contrasena}" required="true" label="password" />
+                        <p:password id="password" value="#{login.contrasena}" required="false" label="password" />
 
                         <f:facet name="footer">
-                            <p:commandButton value="Login" update="barra" actionListener="#{login.autenticar()}"/>
+                            <p:commandButton value="Login" update="barra" actionListener="#{login.autenticar()}" ajax="false"/>
                             <p:commandButton value="¿No tienes cuenta?" update="barra" actionListener="#{userLoginView.login}"/>
                         </f:facet>  
                     </h:panelGrid>
              </p:dialog>
         </h:form>
-        <h:form id="Crear">
+        <h:form id="Crear_Evento">
             
             <p:dialog header="Crear evento" widgetVar="crearEv" resizable="true">
                 <h:panelGrid columns="1" cellpadding="5">
                     <h:outputLabel for="Nombre_Evento" value="Nombre:" />
-                    <p:inputText id="Nombre_Evento" value="" required="true" />
+                    <p:inputText id="Nombre_Evento" value="" required="false" />
                     <h:outputLabel for="Imagen_Evento" value="Url imagen:" />
-                    <p:inputText id="Imagen_Evento" value="" required="true" />
+                    <p:inputText id="Imagen_Evento" value="" required="false" />
                     <p:spacer></p:spacer>
                     <p:selectOneMenu id="Selecciona_Sitio_Evento" value="Sitios" style="width:125px">
                         <f:selectItem itemLabel="Sitios" itemValue="" />
@@ -93,20 +93,64 @@
                         </p:column>
                     </p:row>
                     <p:row>
-                        <p:column><p:inputText id="Tag" value="" required="true" /></p:column>
+                        <p:column><p:inputText id="Tag" value="" required="false" /></p:column>
                         <p:column><p:inputText id="Precio" value="" required="false" /></p:column>
                         <p:column>
                             <p:outputLabel id="fechas_elegidas" value="#{creacionEvento.fechas}"/>
                         </p:column>
                     </p:row>
                 </p:panelGrid>
-                    
+                <h:panelGrid columns="1" cellpadding="5">
+                    <h:outputLabel for="Descripcion_Crear_Evento" value="Descripcion:" />
+                    <h:inputTextarea id="Descripcion_Crear_Evento"></h:inputTextarea>
+                </h:panelGrid>
+                <p:commandButton value="Enviar evento" action="eventoGenerico.xhtml" ajax="false"></p:commandButton>
              </p:dialog>
         </h:form>
-        
+        <h:form id="Crea_Sitios">
+            <p:dialog widgetVar="crearSit">
+                <h:panelGrid columns="1" cellpadding="5">
+                    <h:outputLabel for="Nombre_Sitio" value="Nombre:" />
+                    <p:inputText id="Nombre_Sitio" value="" required="true" />
+                    <h:outputLabel for="Imagen_Sitio" value="Url imagen:" />
+                    <p:inputText id="Imagen_Sitio" value="" required="true" />
+                </h:panelGrid>
+                
+                <p:panelGrid>
+                    <p:row>
+                        <p:column><h:outputLabel for="Pais_Sitio" value="Pais:" /></p:column>
+                        <p:column><h:outputLabel for="Comunidad_Sitio" value="C.C.A.A:" /></p:column>
+                    </p:row>
+                    <p:row>
+                    <p:column><p:inputText id="Pais_Sitio" value="" required="true" /></p:column>
+                    <p:column><p:inputText id="Comunidad_Sitio" value="" required="true" /></p:column>
+                    </p:row>
+                    <p:row>
+                    <p:column><h:outputLabel for="Provincia_Sitio" value="Provincia:" /></p:column>
+                    <p:column><h:outputLabel for="Ciudad_Sitio" value="Ciudad:" /></p:column>
+                    </p:row>
+                    <p:row>
+                    <p:column><p:inputText id="Provincia_Sitio" value="" required="true" /></p:column>
+                    <p:column><p:inputText id="Ciudad_Sitio" value="" required="true" /></p:column>
+                    </p:row>
+                    <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="Direccion_Sitio" value="Direccion:" />
+                    <p:inputText id="Direccion_Sitio" value="" required="true" />
+                    <h:outputLabel for="Url_Sitio" value="Url del sitio:" />
+                    <p:inputText id="Url_Sitio" value="" required="true" />
+                </h:panelGrid>
+                <h:panelGrid columns="1" cellpadding="5">
+                    <h:outputLabel for="Descripcion_Crear_Sitio" value="Descripcion:" />
+                    <h:inputTextarea id="Descripcion_Crear_Sitio"></h:inputTextarea>
+                </h:panelGrid>
+                <p:commandButton value="Enviar sitio"></p:commandButton>
+                </p:panelGrid>
+                
+            </p:dialog>
+        </h:form>
         <h:form id="eventos">
             <p:repeat value="#{vistaEventoGenerico.vistaEventos}" var="evento" size="5">
-                <p:panelGrid columns="2" >
+                <p:panelGrid columns="3" >
                     <p:graphicImage width="200" height="200" url="#{evento.imagen}"  /> 
                     <f:facet name="header" >
                         <p:commandLink value="#{evento.nombre}" ajax="false" action="#{eventoClicado.clicaYEnvia(evento)}"/>
@@ -126,7 +170,24 @@
                     <h:outputText value="Descripción:" />
                     <h:outputText value="#{evento.descripcion}" style="font-weight: bold"/>
                 </h:panelGrid>
+                        
             </p:outputPanel>
+                    <c:choose>
+                        <c:when test="#{login.logged}">
+                            <h:panelGrid columns="1">
+                            <p:commandButton value="Like"></p:commandButton>
+                            <p:commandButton value="Dislike"></p:commandButton>
+                            <p:commandButton value="Voy a ir"></p:commandButton>
+                            </h:panelGrid>
+                        </c:when>
+                        <c:otherwise>
+                            
+                            <h:panelGrid columns="1">
+                            <h:outputText value="Like"></h:outputText>
+                            <h:outputText value="Dislike"></h:outputText>
+                            </h:panelGrid>
+                        </c:otherwise>
+                    </c:choose>
                 </p:panelGrid>
             </p:repeat>
         </h:form>

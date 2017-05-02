@@ -6,10 +6,14 @@
 package backingbeans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import jpa.Evento;
+import jpa.Publicacion;
+import jpa.Usuario;
 
 /**
  *
@@ -22,6 +26,7 @@ public class VistaEvento implements Serializable {
     private Date fechaIn;
     private Date fechaFin;
     private String nombre;
+    private Usuario us;
     private String descripcion;
     private String imagen;
     private String sitio;
@@ -29,7 +34,8 @@ public class VistaEvento implements Serializable {
     private String video;
     private float precioEntradas;
     private String urlCompraEntrada;
-    
+    private List<Publicacion> pub;
+    private List<Publicacion> media;
 
     public VistaEvento(Evento ev) {
         this.fechaIn = ev.getSesionesCelebradas().get(0).getFechaInicio();
@@ -41,8 +47,46 @@ public class VistaEvento implements Serializable {
         this.tag = ev.getTag();
         this.video = ev.getVideo();
         this.precioEntradas = ev.getSesionesCelebradas().get(0).getPrecio();
-        System.out.print(0);
         this.urlCompraEntrada = ev.getSesionesCelebradas().get(0).getUrlCompraEntrada();
+        this.pub = new ArrayList<>();
+        for (int i = 0; i< 5;i++) {
+        this.pub.add(new Publicacion());
+        this.pub.get(i).setCreador(new Usuario());
+        this.pub.get(i).getCreador().setNombre("Mariot");
+        this.pub.get(i).setValoracion(5);
+        this.pub.get(i).setTexto("Muy bueno");
+        }
+        this.media = new ArrayList<>();
+        for(int i = 0; i<5;i++) {
+            this.media.add(new Publicacion());
+            this.media.get(i).setTitulo("Titulo "+i);
+            this.media.get(i).setMultimedia(VistaEventoGenerico.IMAGEN);
+        }
+        this.us = ev.getCreador();
+    }
+
+    public Usuario getUs() {
+        return us;
+    }
+
+    public void setUs(Usuario us) {
+        this.us = us;
+    }
+
+    public List<Publicacion> getMedia() {
+        return media;
+    }
+
+    public void setMedia(List<Publicacion> media) {
+        this.media = media;
+    }
+
+    public List<Publicacion> getPub() {
+        return pub;
+    }
+
+    public void setPub(List<Publicacion> pub) {
+        this.pub = pub;
     }
     
     

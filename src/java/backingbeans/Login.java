@@ -101,5 +101,12 @@ public class Login {
     public boolean isLogged() {
         return rol!=null;
     }
+    public boolean puedeEditar(VistaEvento ev) {
+        return isLogged() && (rol.equals(PERIODISTA) 
+                || 
+                nombreOCorreo.equals(ev.)
+                || 
+                nombreOCorreo.equals(ev.g));
+    }
     
 }
