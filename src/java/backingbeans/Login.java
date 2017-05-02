@@ -28,6 +28,7 @@ public class Login {
     private String nombreOCorreo;
     private String contrasena;
     private String rol;
+    private Usuario cuentaUsuario;
     public Login() {
         Usuario usuario = new Usuario();
         usuario.setNombre("Mariot");
@@ -56,16 +57,25 @@ public class Login {
                 (u.getNombre().equals(nombreOCorreo) || u.getEmail().equals(nombreOCorreo))&&
                         u.getContraseña().equals(contrasena)).findFirst().orElse(null);
         rol = us!=null? us.getRol() : null;
+        this.cuentaUsuario=us;
         return "eventoGenerico.xhtml";
     
     }
+
+    public Usuario getCuentaUsuario() {
+        return cuentaUsuario;
+    }
+
+    public void setCuentaUsuario(Usuario cuentaUsuario) {
+        this.cuentaUsuario = cuentaUsuario;
+    }
+    
     public String logout() {
         nombreOCorreo = null;
         contrasena = null;
         rol = null;
         FacesContext ctx = FacesContext.getCurrentInstance();
         ctx.getExternalContext().invalidateSession();
-        System.out.println("A");
         return "eventoGenerico.xhtml";
     
     }

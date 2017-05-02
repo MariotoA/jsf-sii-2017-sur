@@ -27,6 +27,7 @@
                         <p:inputText id="buscar" style="margin-right:10px" placeholder="Buscar">
                                 <p:calendar id="calendario" value="#{calendarView.date1}"  rendered="false"/>     
                         </p:inputText> 
+                        <p:commandLink type="button" value="Perfil" action="perfil.xhtml" ajax="false" />
                         <p:commandLink type="button" value="Salir" action="#{login.logout()}" ajax="false" />
                     </f:facet>
                     </c:when>
@@ -40,6 +41,8 @@
                         <p:inputText id="buscar" style="margin-right:10px" placeholder="Buscar">
                                 <p:calendar id="calendario" value="#{calendarView.date1}"  rendered="false"/>     
                         </p:inputText> 
+                        <p:commandLink type="button" value="Perfil" action="perfil.xhtml" ajax="false" />
+                        <p:spacer></p:spacer>
                         <p:commandLink type="button" value="Salir" action="#{login.logout()}" ajax="false" />
                     </f:facet>
                 </c:when>
@@ -64,7 +67,7 @@
 
                         <f:facet name="footer">
                             <p:commandButton value="Login" update="barra" actionListener="#{login.autenticar()}" ajax="false"/>
-                            <p:commandButton value="¿No tienes cuenta?" update="barra" actionListener="#{userLoginView.login}"/>
+                            <p:commandButton value="¿No tienes cuenta?" action="registro.xhtml"/>
                         </f:facet>  
                     </h:panelGrid>
              </p:dialog>

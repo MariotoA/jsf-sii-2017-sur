@@ -1,0 +1,22 @@
+root{
+    display: block;
+}
+
+.alinizq{
+    text_align: left;
+}
+
+.alinder{
+    text-align: right;
+}
+
+.alinder-bold{
+    text-align: right;
+    font-weight: bold;
+    }
+    
+normal{
+     font-weight: normal;   
+    }
+
+
