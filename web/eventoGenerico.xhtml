@@ -16,6 +16,20 @@
                 <p:menuitem value="Inicio" url="eventoGenerico.xhtml" />
                 <p:menuitem value="Sitios" url="sitioGenerico.xhtml" />
                 <c:choose>
+                    <c:when test="#{login.periodista}">
+                    <p:menuitem value="mis eventos" url="#" />
+                    <p:menuitem value="Validacion eventos" url="#" />
+                    <p:submenu label=" + ">
+                        <p:menuitem value="Crear sitio" onclick="PF('crearSit').show();"/>
+                        <p:menuitem value="Crear evento" onclick="PF('crearEv').show();" />
+                    </p:submenu>
+                    <f:facet name="options">
+                        <p:inputText id="buscar" style="margin-right:10px" placeholder="Buscar">
+                                <p:calendar id="calendario" value="#{calendarView.date1}"  rendered="false"/>     
+                        </p:inputText> 
+                        <p:commandLink type="button" value="Salir" action="#{login.logout()}" ajax="false" />
+                    </f:facet>
+                    </c:when>
                 <c:when test="#{login.logged}">
                     <p:menuitem value="mis eventos" url="#" />
                     <p:submenu label=" + ">

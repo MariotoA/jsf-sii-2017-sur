@@ -123,6 +123,28 @@
         </h:form>
                 </c:when>
             </c:choose>
+        
+        <c:choose>
+            <c:when test="#{login.puedeEditar(eventoClicado.eventoClicado)}">
+                <h:form>
+                    <p:commandButton value="Editar evento"/>
+                    <p:commandButton value="Borrar evento"/>
+                </h:form>
+            </c:when>
+        </c:choose>
+        
+        <c:choose>
+            <c:when test="#{login.periodista}">
+                <h:form>
+                    <p:commandButton value="Estado de evento" onclick="PF('Estado_Evento').show()"/>
+                    <p:dialog widgetVar="Estado_Evento" header="Estado">
+                        <p:commandButton value="Validar"></p:commandButton>
+                        <p:commandButton value="Rechazar"></p:commandButton>
+                    </p:dialog>
+                </h:form>
+            </c:when>
+        </c:choose>
+        
         <h:form id="galeria_Evento">
             <p:commandButton value="Galeria" onclick="PF('Galeria_dialog').show()"/>
             <p:dialog widgetVar="Galeria_dialog" header="Galeria">

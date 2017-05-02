@@ -21,9 +21,9 @@ import jpa.Usuario;
 @SessionScoped
 public class Login {
     private final static String ADMINISTRADOR="a";
-    private final static String USUARIO="u";
-    private final static String PERIODISTA="p";
-    private final static String SUPERUSUARIO="s";
+    public final static String USUARIO="u";
+    public final static String PERIODISTA="p";
+    public final static String SUPERUSUARIO="s";
     private List<Usuario> usuarios;
     private String nombreOCorreo;
     private String contrasena;
@@ -107,6 +107,9 @@ public class Login {
                 nombreOCorreo.equals(ev.getUs().getNombre())
                 || 
                 nombreOCorreo.equals(ev.getUs().getEmail()));
+    }
+    public boolean isPeriodista() {
+        return isLogged() && (rol.equals(PERIODISTA) );
     }
     
 }

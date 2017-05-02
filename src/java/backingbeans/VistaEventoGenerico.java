@@ -40,13 +40,18 @@ public class VistaEventoGenerico implements Serializable {
     public void init() {
         Evento ev;
         Sitio sit;
+        Usuario superusuariu = new Usuario();
+        superusuariu.setNombre("Cris");
+        superusuariu.setContraseña("12345678");
+        superusuariu.setEmail("crisalidaelfr@todopo.es");
+        superusuariu.setRol(Login.SUPERUSUARIO);
         List<Sesion> ses;
         eventos = new ArrayList<>();
         sitios = new ArrayList<>();
         vistaEventos = new ArrayList<>();
         for (int i = 1; i < 31; i++) {
             sit = creaSitio(i);
-            ev = creaEvento(sit,i);
+            ev = creaEvento(sit,i,superusuariu);
             ses = creaSesiones(ev,i);
             sitios.add(sit);
             eventos.add(ev);
@@ -72,7 +77,7 @@ public class VistaEventoGenerico implements Serializable {
         return sit;
     }
 
-    private Evento creaEvento(Sitio sit, int i) {
+    private Evento creaEvento(Sitio sit, int i,Usuario us) {
         Evento ev=new Evento();
         ev.setLocalizacion(sit);
         ev.setNombre("Titulo evento "+ i);
@@ -80,6 +85,7 @@ public class VistaEventoGenerico implements Serializable {
         ev.setFoto(IMAGEN);
         ev.setTag("TAG: "+i);
         ev.setVideo(VIDEO);
+        ev.setCreador(us);
         sit.setEventosCelebrados(eventos);
         return ev;
     }
