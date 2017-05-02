@@ -18,11 +18,14 @@
                 <c:choose>
                 <c:when test="#{login.logged}">
                     <p:menuitem value="mis eventos" url="#" />
+                    <p:submenu label=" + ">
+                        <p:menuitem value="Crear sitio" onclick="PF('crearEv').show();"/>
+                        <p:menuitem value="Crear evento" onclick="PF('crearEv').show();" />
+                    </p:submenu>
                     <f:facet name="options">
                         <p:inputText id="buscar" style="margin-right:10px" placeholder="Buscar">
                                 <p:calendar id="calendario" value="#{calendarView.date1}"  rendered="false"/>     
                         </p:inputText> 
-                        
                         <p:commandLink type="button" value="Salir" action="#{login.logout()}" ajax="false" />
                     </f:facet>
                 </c:when>
@@ -52,6 +55,55 @@
                     </h:panelGrid>
              </p:dialog>
         </h:form>
+        <h:form id="Crear">
+            
+            <p:dialog header="Crear evento" widgetVar="crearEv" resizable="true">
+                <h:panelGrid columns="1" cellpadding="5">
+                    <h:outputLabel for="Nombre_Evento" value="Nombre:" />
+                    <p:inputText id="Nombre_Evento" value="" required="true" />
+                    <h:outputLabel for="Imagen_Evento" value="Url imagen:" />
+                    <p:inputText id="Imagen_Evento" value="" required="true" />
+                    <p:spacer></p:spacer>
+                    <p:selectOneMenu id="Selecciona_Sitio_Evento" value="Sitios" style="width:125px">
+                        <f:selectItem itemLabel="Sitios" itemValue="" />
+                        <f:selectItems value="#{vistaEventoGenerico.sitios}"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <p:panelGrid>
+                    <p:row>
+                        <p:column>url video</p:column>
+                        <p:column>entradas</p:column>
+                        <p:column>
+                            <p:outputLabel for="datetime" value="Datetime:" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column><p:inputText id="Url_Video" value="" required="false" /></p:column>
+                        <p:column><p:inputText id="Url_Entradas" value="" required="false" /></p:column>
+                        <p:column>
+                            <p:calendar id="datetime" value="#{creacionEvento.fecha}"  pattern="MM/dd/yyyy HH:mm">
+                            </p:calendar>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>tag</p:column>
+                        <p:column>precio</p:column>
+                        <p:column>
+                            <p:commandButton value="Añadir fecha" update="fechas_elegidas" actionListener="#{creacionEvento.incluyeFecha()}"></p:commandButton>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column><p:inputText id="Tag" value="" required="true" /></p:column>
+                        <p:column><p:inputText id="Precio" value="" required="false" /></p:column>
+                        <p:column>
+                            <p:outputLabel id="fechas_elegidas" value="#{creacionEvento.fechas}"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+                    
+             </p:dialog>
+        </h:form>
+        
         <h:form id="eventos">
             <p:repeat value="#{vistaEventoGenerico.vistaEventos}" var="evento" size="5">
                 <p:panelGrid columns="2" >
