@@ -28,10 +28,6 @@ public class EventoClicado {
     private void setEventoClicado(VistaEvento eventoClicado) {
         this.eventoClicado = eventoClicado;
     }
-    private void setEventoClicado() {
-        this.eventoClicado = eventoClicado;
-    }
-    
     public String clicaYEnvia(VistaEvento eventoClicado) {
         this.setEventoClicado(eventoClicado);
         return "eventoDetalle.xhtml";
