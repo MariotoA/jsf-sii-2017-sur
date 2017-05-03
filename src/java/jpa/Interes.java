@@ -22,7 +22,6 @@ public class Interes implements Serializable {
     private boolean meGusta;
     private boolean noMeGusta;
     private boolean acudir;
-    private boolean recibirNotifiaciones;
     
     
     /*interes--usuario*/
@@ -76,14 +75,6 @@ public class Interes implements Serializable {
 
     public void setAcudir(boolean acudir) {
         this.acudir = acudir;
-    }
-
-    public boolean isRecibirNotifiaciones() {
-        return recibirNotifiaciones;
-    }
-
-    public void setRecibirNotifiaciones(boolean recibirNotifiaciones) {
-        this.recibirNotifiaciones = recibirNotifiaciones;
     }
 
     public Long getId() {

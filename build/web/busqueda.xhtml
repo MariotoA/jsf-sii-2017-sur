@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="barra_busqueda">
+        <p:menubar>
+                <p:menuitem value="Inicio" url="eventoGenerico.xhtml" />
+                <p:menuitem value="Busqueda avanzada" url="busquedaAvanzada.xhtml"/>
+                
+                <f:facet name="options">
+                        <p:inputText id="buscar" style="margin-right:10px" placeholder="Buscar" 
+                                     onkeypress="if (event.which === 13 ||event.keyCode===13){ window.location.replace('busqueda.xhtml');return false;}"/>
+                </f:facet>
+        </p:menubar>
+            </h:form>
+        <h:panelGrid columns="2">
+            <h:form id="eventos">
+            <p:repeat value="#{vistaEventoGenerico.vistaEventos}" var="evento" size="5">
+                <p:panelGrid columns="3" >
+                    <p:graphicImage width="200" height="200" url="#{evento.imagen}"  /> 
+                    <f:facet name="header" >
+                        <p:commandLink value="#{evento.nombre}" ajax="false" action="#{eventoClicado.clicaYEnvia(evento)}"/>
+                    </f:facet>
+
+                    <p:outputPanel>
+                <h:panelGrid columns="2" cellpadding="5" >
+                    <h:outputText value="Tag:" />
+                    <h:outputText value="#{evento.tag}" style="font-weight: bold"/>
+                    
+                    <h:outputText value="Fecha Inicio:" />
+                    <h:outputText value="#{evento.fechaIn}" style="font-weight: bold"/>
+ 
+                    <h:outputText value="Fecha Fin:" />
+                    <h:outputText value="#{evento.fechaFin}" style="font-weight: bold"/>
+ 
+                    <h:outputText value="Descripción:" />
+                    <h:outputText value="#{evento.descripcion}" style="font-weight: bold"/>
+                </h:panelGrid>
+                        
+            </p:outputPanel>
+                    <c:choose>
+                        <c:when test="#{login.logged}">
+                            <h:panelGrid columns="1">
+                            <p:commandButton value="Like"></p:commandButton>
+                            <p:commandButton value="Dislike"></p:commandButton>
+                            <p:commandButton value="Voy a ir"></p:commandButton>
+                            </h:panelGrid>
+                        </c:when>
+                        <c:otherwise>
+                            
+                            <h:panelGrid columns="1">
+                            <h:outputText value="Like"></h:outputText>
+                            <h:outputText value="Dislike"></h:outputText>
+                            </h:panelGrid>
+                        </c:otherwise>
+                    </c:choose>
+                </p:panelGrid>
+            </p:repeat>
+        </h:form>
+            
+        <h:form id="sitios">
+            <p:repeat value="#{vistaEventoGenerico.sitios}" var="sitio" size="5">
+                <p:panelGrid columns="3" >
+                    <p:graphicImage width="200" height="200" url="#{sitio.foto}"  /> 
+                    <f:facet name="header" >
+                        <p:commandLink value="#{sitio.nombre}" ajax="false" action="#{sitioClicado.clicaYEnvia(sitio)}"/>
+                    </f:facet>
+
+                    <p:outputPanel>
+                <h:panelGrid columns="2" cellpadding="5" >
+                    <h:outputText value="Direccion:" />
+                    <h:outputText value="#{sitio.direccion}" style="font-weight: bold"/>
+                    
+                    <h:outputText value="Ciudad:" />
+                    <h:outputText value="#{sitio.ciudad}" style="font-weight: bold"/>
+ 
+                    <h:outputText value="Provincia:" />
+                    <h:outputText value="#{sitio.provincia}" style="font-weight: bold"/>
+ 
+                    <h:outputText value="Comunidad:" />
+                    <h:outputText value="#{sitio.comunidadAutonoma}" style="font-weight: bold"/>
+                    <h:outputText value="Pais:" />
+                    <h:outputText value="#{sitio.pais}" style="font-weight: bold"/>
+                </h:panelGrid>
+            </p:outputPanel>
+                    <c:choose>
+                        <c:when test="#{login.logged}">
+                            <h:panelGrid columns="1">
+                            <p:commandButton value="Like"></p:commandButton>
+                            <p:commandButton value="Dislike"></p:commandButton>
+                            </h:panelGrid>
+                        </c:when>
+                        <c:otherwise>
+                            <h:panelGrid columns="1">
+                            <h:outputText value="Like"></h:outputText>
+                            <h:outputText value="Dislike"></h:outputText>
+                            </h:panelGrid>
+                        </c:otherwise>
+                    </c:choose>
+                </p:panelGrid>
+            </p:repeat>
+        </h:form>
+        </h:panelGrid>
+    </h:body>
+</html>
+

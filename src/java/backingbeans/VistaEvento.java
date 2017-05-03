@@ -34,6 +34,7 @@ public class VistaEvento implements Serializable {
     private String video;
     private float precioEntradas;
     private String urlCompraEntrada;
+    private int prioridad;
     private List<Publicacion> pub;
     private List<Publicacion> media;
 
@@ -63,10 +64,19 @@ public class VistaEvento implements Serializable {
             this.media.get(i).setMultimedia(VistaEventoGenerico.IMAGEN);
         }
         this.us = ev.getCreador();
+        this.prioridad = ev.getPrioridad();
     }
 
     public Usuario getUs() {
         return us;
+    }
+
+    public int getPrioridad() {
+        return prioridad;
+    }
+
+    public void setPrioridad(int prioridad) {
+        this.prioridad = prioridad;
     }
 
     public void setUs(Usuario us) {

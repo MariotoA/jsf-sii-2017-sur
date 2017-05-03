@@ -36,6 +36,7 @@ public class Login {
         usuario.setContraseña("12345678");
         usuario.setEmail("miCo@gmail.com");
         usuario.setRol(USUARIO);
+        usuario.setRecibirNotifiaciones(true);
         Usuario periodista = new Usuario();
         periodista.setNombre("Ernesti");
         periodista.setContraseña("12345678");
@@ -52,7 +53,9 @@ public class Login {
         usuarios.add(superusuariu);
 
     }
-    
+    public boolean recibeNotificaciones() {
+        return this.isLogged() && this.cuentaUsuario.isRecibirNotifiaciones();
+    }
     public String autenticar() {
         Usuario us = usuarios.stream().filter(u-> 
                 (u.getNombre().equals(nombreOCorreo) || u.getEmail().equals(nombreOCorreo))&&

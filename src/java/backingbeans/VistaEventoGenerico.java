@@ -94,6 +94,7 @@ public class VistaEventoGenerico implements Serializable {
         ev.setTag("TAG: "+i);
         ev.setVideo(VIDEO);
         ev.setCreador(us);
+        ev.setPrioridad(i);
         sit.setEventosCelebrados(eventos);
         return ev;
     }

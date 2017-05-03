@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="barra_busqueda">
+        <p:menubar>
+                <p:menuitem value="Inicio" url="eventoGenerico.xhtml" />
+        </p:menubar>
+        </h:form>   
+        
+        <h:form id="Crear_Evento">
+            <h:panelGrid columns="1">
+            <p:inputText id="Nombre_Evento" required="false" placeholder="Nombre" />
+            <p:inputText id="Direccion" required="false" placeholder="Direccion" />
+            <p:inputText id="Ciudad"  required="false" placeholder="Ciudad" />
+            <p:inputText id="Provincia"  required="false" placeholder="Provincia" />
+            <p:inputText id="CCAA"  required="false" placeholder="Comunidad Autónoma" />
+            <p:inputText id="Pais"  required="false" placeholder="País" />
+                            <p:outputLabel for="datetime" value="Datetime:" />
+                       
+                        
+                            <p:calendar id="datetime" value="#{creacionEvento.fecha}"  pattern="MM/dd/yyyy HH:mm">
+                            </p:calendar>
+                  
+                            <p:commandButton value="Añadir fecha" actionListener="#{creacionEvento.incluyeFecha()}"></p:commandButton>
+                        
+                            <p:outputLabel id="fechas_elegidas" value="#{creacionEvento.fechas}"/>
+                        <p:inputText id="Tag" required="false" placeholder="TAG"/>
+                        <p:inputText id="Precio" required="false" placeholder="Precio Entradas"/>
+                        <p:commandButton value="Buscar" action="busqueda.xhtml" ajax="false"></p:commandButton>
+               </h:panelGrid>
+                       
+        </h:form>
+    </h:body>
+</html>
+

@@ -32,7 +32,7 @@ public class Usuario implements Serializable {
     private String ciudad;
     @Column(nullable = false)
     private String rol;
-    
+    private boolean recibirNotifiaciones;
     
     /*Relaciones con evento.*/
     @OneToMany(mappedBy="creador")
@@ -187,6 +187,24 @@ public class Usuario implements Serializable {
         this.rol = rol;
     }
 
+    public boolean isRecibirNotifiaciones() {
+        return recibirNotifiaciones;
+    }
+
+    public void setRecibirNotifiaciones(boolean recibirNotifiaciones) {
+        this.recibirNotifiaciones = recibirNotifiaciones;
+    }
+
+    public List<Interes> getInteresesReflejados() {
+        return interesesReflejados;
+    }
+
+    public void setInteresesReflejados(List<Interes> interesesReflejados) {
+        this.interesesReflejados = interesesReflejados;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;
