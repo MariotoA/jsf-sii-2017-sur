@@ -10,6 +10,7 @@ import java.util.List;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import jpa.Sitio;
 import jpa.Usuario;
 
 /**
@@ -21,9 +22,9 @@ import jpa.Usuario;
 @SessionScoped
 public class Login {
     private final static String ADMINISTRADOR="a";
-    public final static String USUARIO="u";
-    public final static String PERIODISTA="p";
-    public final static String SUPERUSUARIO="s";
+    public final static String USUARIO="USUARIO";
+    public final static String PERIODISTA="PERIODISTA";
+    public final static String SUPERUSUARIO="SUPERUSUARIO";
     private List<Usuario> usuarios;
     private String nombreOCorreo;
     private String contrasena;
@@ -117,6 +118,13 @@ public class Login {
                 nombreOCorreo.equals(ev.getUs().getNombre())
                 || 
                 nombreOCorreo.equals(ev.getUs().getEmail()));
+    }
+    public boolean puedeEditar(Sitio sit) {
+        return isLogged() && (rol.equals(PERIODISTA) 
+                || 
+                nombreOCorreo.equals(sit.getCreador().getNombre())
+                || 
+                nombreOCorreo.equals(sit.getCreador().getEmail()));
     }
     public boolean isPeriodista() {
         return isLogged() && (rol.equals(PERIODISTA) );

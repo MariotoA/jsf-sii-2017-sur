@@ -21,7 +21,7 @@ import jpa.*;
 @ViewScoped
 public class VistaEventoGenerico implements Serializable {
     public final static String IMAGEN = "https://www.dondevive.org/wp-content/uploads/2015/07/leon.jpg";
-    public final static String VIDEO = "https://www.youtube.com/watch?v=6hgVihWjK2c";
+    public final static String VIDEO = "https://www.youtube.com/watch?v=6hgVihWjK2c ";
     
     private List<Evento> eventos;
     private List<Sitio> sitios;
@@ -50,7 +50,7 @@ public class VistaEventoGenerico implements Serializable {
         sitios = new ArrayList<>();
         vistaEventos = new ArrayList<>();
         for (int i = 1; i < 31; i++) {
-            sit = creaSitio(i);
+            sit = creaSitio(i,superusuariu);
             ev = creaEvento(sit,i,superusuariu);
             ses = creaSesiones(ev,i);
             sitios.add(sit);
@@ -63,7 +63,7 @@ public class VistaEventoGenerico implements Serializable {
         return sitios;
     }
 
-    private Sitio creaSitio(int i) {
+    private Sitio creaSitio(int i,Usuario us) {
         Sitio sit = new Sitio();
         sit.setNombre("nombreSitio"+i);
         sit.setPais("España");
@@ -74,6 +74,14 @@ public class VistaEventoGenerico implements Serializable {
         sit.setDireccion("Direccion"+i);
         sit.setDescripcion("Descripción genérica");
         sit.setComunidadAutonoma("Andalucia");
+        sit.setCreador(us);
+        sit.setPublicaciones(new ArrayList<>());
+        for (int j = 0; j < 10; j++) {
+            sit.getPublicaciones().add(new Publicacion());
+            sit.getPublicaciones().get(j).setValoracion(i);
+            sit.getPublicaciones().get(j).setTexto("Texto de valoracion sitio");
+            sit.getPublicaciones().get(j).setCreador(us);
+        }
         return sit;
     }
 
